@@ -1,1 +1,2 @@
 instance-builds/.terraform/
+instance-builds/terraform.tfvars
