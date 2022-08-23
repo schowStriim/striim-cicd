@@ -1,0 +1,15 @@
+---
+- hosts: all
+  become: yes
+  become_user: root
+  become_method: sudo
+  tasks:
+    - name: Copy striim install bash script
+      copy:
+        src: "files/striim_install.sh"
+        dest: "/root/striim_install.sh"
+
+    - name: Install Java & Striim from striim_install.sh
+      shell: "/bin/sh /root/striim_install.sh"
+      become: yes
+  

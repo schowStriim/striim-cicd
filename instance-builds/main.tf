@@ -45,7 +45,7 @@ data "aws_ami" "amazon-linux-2" {
   owners      = ["self"]  
   filter {
     name   = "name"
-    values = ["aws-ec2-striim-ami"]
+    values = ["dev-centos-striim*"]
   }
 }
 
@@ -58,8 +58,6 @@ resource "aws_instance" "aws-ec2-server" {
   source_dest_check      = false
   key_name               = "simson_dev"
   associate_public_ip_address = var.vm_associate_public_ip_address
-  
-  #user_data = file("aws-user-data.sh")
   
   # root disk
   root_block_device {
