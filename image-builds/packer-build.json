@@ -1,0 +1,41 @@
+{
+    "variables":{
+        "aws_access_key": "{{env `AWS_ACCESS_KEY`}}",
+        "aws_secret_key": "{{env `AWS_SECRET_KEY`}}",
+        "subscription_id": "{{env `SUBSCRIPTION_ID`}}",
+        "client_id": "{{env `CLIENT_ID`}}",
+        "client_secret": "{{env `CLIENT_SECRET`}}"
+    },
+    
+    "builders":[
+        {
+            "type": "azure-arm",
+            "client_secret": "{{user `client_secret`}}",
+            "client_id": "{{user `client_id`}}",
+            "subscription_id": "{{user `subscription_id`}}",
+            "image_publisher": "OpenLogic",
+            "image_offer": "CentOS",
+            "image_sku": "8_5",
+            "location": "West US",
+            "os_type": "Linux",
+            "managed_image_name": "azure-centos-striim-image-{{timestamp}}",
+            "managed_image_resource_group_name": "myResourceGroup"
+        },
+        {
+            "type": "amazon-ebs",
+            "access_key": "{{user `aws_access_key`}}",
+            "secret_key": "{{user `aws_secret_key`}}",
+            "region": "us-west-2",
+            "ami_name": "aws-centos-striim-image-{{timestamp}}",
+            "source_ami": "ami-0cea098ed2ac54925",
+            "instance_type": "t2.micro",
+            "ssh_username": "ec2-user"
+        }
+    ],
+    "provisioners":[
+        {
+            "type": "ansible",
+            "playbook_file": "ansible/application.yml"
+        }
+    ]
+}

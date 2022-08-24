@@ -45,7 +45,7 @@ data "aws_ami" "amazon-linux-2" {
   owners      = ["self"]  
   filter {
     name   = "name"
-    values = ["dev-centos-striim*"]
+    values = ["aws-centos-striim-image*"]
   }
 }
 
