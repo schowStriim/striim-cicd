@@ -26,8 +26,11 @@ jobs:
       - uses: actions/checkout@v3
 
       # Runs a single command using the runners shell
-      - name: Install postgresql
-        run: sudo apt install postgresql-client
+      - name: Install packer
+        run: |
+          curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
+          sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+          sudo apt-get update && sudo apt-get install packer
 
       # Runs a set of commands using the runners shell
       - name: Run a multi-line script
