@@ -9,4 +9,4 @@ java -version
 
 #Install Striim
 curl -0 -J -L https://striim-downloads.s3.us-west-1.amazonaws.com/Releases/4.1.0/Striim_4.1.0.tgz --output /opt/striim.tgz
-tar -xvf /opt/striim.tgz
+tar zxvf /opt/striim.tgz

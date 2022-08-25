@@ -30,7 +30,15 @@
             "source_ami": "ami-0cea098ed2ac54925",
             "instance_type": "t2.micro",
             "ssh_username": "ec2-user"
-        }
+        },
+    	{
+      	   "type": "googlecompute",
+           "project_id": "ancient-yeti-175123",
+           "source_image": "centos-7-v20220719",
+           "zone": "us-central1-a",
+           "ssh_username": "dev-gcp-image",
+           "account_file": "gcp-packer-svc.json"
+    	}
     ],
     "provisioners":[
         {
