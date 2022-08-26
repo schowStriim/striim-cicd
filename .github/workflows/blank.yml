@@ -22,7 +22,12 @@ jobs:
     
     # Set environment variables
     env:
+      CLIENT_ID: ${{ secrets.CLIENT_ID }}
+      SUBSCRIPTION_ID: ${{ secrets.SUBSCRIPTION_ID }}
       CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
+      AWS_ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY }}
+      AWS_SECRET_KEY: ${{ secrets.AWS_SECRET_KEY }}
+      
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
