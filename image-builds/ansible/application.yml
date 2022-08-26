@@ -29,11 +29,10 @@
     - name: Download Striim
       get_url:
         url: "https://striim-downloads.s3.us-west-1.amazonaws.com/Releases/4.1.0/Striim_4.1.0.tgz"
-        dest: "/opt/striim.tgz"
+        dest: "/home/striim.tgz"
     
     - name: Untar strim.tgz file
-      shell: "tar zxvf /opt/striim.tgz"
-      become: yes 
+      shell: "tar zxvf /home/striim.tgz" 
 
     # Install PostgreSQL 
     - name: Install packages
