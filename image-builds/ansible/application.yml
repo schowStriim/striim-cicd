@@ -42,7 +42,7 @@
         - { src: "files/startUp.properties", dest: "/opt/Striim/conf/" }
     
     - name: Execute Striim
-      shell: "bin/bash /opt/Striim/bin/server.sh"
+      shell: "/bin/bash /opt/Striim/bin/server.sh"
     
     # Install PostgreSQL 
     - name: Install packages
