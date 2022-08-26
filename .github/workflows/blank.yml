@@ -40,9 +40,18 @@ jobs:
           sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
           sudo apt-get update && sudo apt-get install packer
           sudo apt install ansible -y
-
+        
+      - name: Create GCP Account file
+        id: gcp-account-file 
+        uses: jsdaniell/create-json@1.1.2
+        with:
+          name: "account-file.json"
+          json: ${{ secrets.GCP_ACCOUNT_CREDENTIALS }}
+          dir: 'image-builds/'
+          
       # Runs a set of commands using the runners shell
-      - name: Environment
+      - name: Build packer images
         run: |
           cd image-builds
+          cat account-file.json
           packer build packer-build.json
