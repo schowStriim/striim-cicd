@@ -32,7 +32,7 @@
         dest: "/home/striim.tgz"
     
     - name: Untar strim.tgz file
-      shell: "tar zxvf /home/striim.tgz" 
+      shell: "tar zxvf /home/striim.tgz -C /opt/" 
 
     # Install PostgreSQL 
     - name: Install packages
