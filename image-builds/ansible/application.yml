@@ -13,8 +13,8 @@
       get_url:
         url: "https://striim-downloads.s3.us-west-1.amazonaws.com/jdk-8u341-linux-x64.tar.gz"
         dest: "/home/jdk-8u341-linux-x64.tar.gz"
-
-    - name: Make jvm/ directory
+ 
+    - name: Make jvm/ directory to store Java JDK
       shell: "mkdir -p /usr/lib/jvm"
 
     - name: Untar Java JDK
@@ -40,6 +40,9 @@
         - { src: "files/sks.jks", dest: "/opt/Striim/conf/" }
         - { src: "files/sksKey.pwd", dest: "/opt/Striim/conf/" }
         - { src: "files/startUp.properties", dest: "/opt/Striim/conf/" }
+    
+    - name: Execute Striim
+      shell: "bin/bash /opt/Striim/bin/server.sh"
     
     # Install PostgreSQL 
     - name: Install packages
