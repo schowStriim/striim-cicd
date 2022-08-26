@@ -43,7 +43,6 @@
           - postgresql-server
           - postgresql-contrib
           - postgresql-libs
-          - python3-psycopg2
         state: present
 
     - name: Check if PostgreSQL is initialized
