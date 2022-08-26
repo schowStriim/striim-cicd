@@ -36,6 +36,7 @@
            "project_id": "ancient-yeti-175123",
            "source_image": "centos-7-v20220719",
            "zone": "us-central1-a",
+	   "ami_name": "gcp-centos-striim-image-{{timestamp}}",
            "ssh_username": "dev-gcp-image",
            "account_file": "account-file.json"
     	}

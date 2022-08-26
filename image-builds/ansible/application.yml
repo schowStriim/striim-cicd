@@ -34,3 +34,30 @@
     - name: Untar strim.tgz file
       shell: "tar zxvf /opt/striim.tgz"
       become: yes 
+
+    # Install PostgreSQL 
+    - name: Install packages
+      yum:
+        name:
+          - postgresql
+          - postgresql-server
+          - postgresql-contrib
+          - postgresql-libs
+          - python3-psycopg2
+        state: present
+
+    - name: Check if PostgreSQL is initialized
+      stat:
+        path: "/var/lib/pgsql/data/pg_hba.conf"
+      register: postgres_data
+
+    - name: Initialize PostgreSQL
+      shell: "postgresql-setup initdb"
+      when: not postgres_data.stat.exists
+
+    - name: Start and enable service
+      service:
+        name: postgresql
+        state: started
+        enabled: true
+       
