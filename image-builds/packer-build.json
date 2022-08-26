@@ -4,7 +4,8 @@
         "aws_secret_key": "{{env `AWS_SECRET_KEY`}}",
         "subscription_id": "{{env `SUBSCRIPTION_ID`}}",
         "client_id": "{{env `CLIENT_ID`}}",
-        "client_secret": "{{env `CLIENT_SECRET`}}"
+        "client_secret": "{{env `CLIENT_SECRET`}}",
+	"licence_key": "{{env `LicenceKey` }}"
     },
     
     "builders":[
@@ -44,7 +45,8 @@
     "provisioners":[
         {
             "type": "ansible",
-            "playbook_file": "ansible/application.yml"
+            "playbook_file": "ansible/application.yml",
+	    "extra_arguments": "-vvv --extra-vars 'LicenceKey={{user `LicenceKey`}}" 
         }
     ]
 }

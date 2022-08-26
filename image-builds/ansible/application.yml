@@ -8,7 +8,8 @@
       copy:
         src: "files/striim_install.sh"
         dest: "/root/striim_install.sh"
-
+    - name: 
+      shell: "echo {{ LicenceKey }}"
     - name: Download Java
       get_url:
         url: "https://striim-downloads.s3.us-west-1.amazonaws.com/jdk-8u341-linux-x64.tar.gz"
