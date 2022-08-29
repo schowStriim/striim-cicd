@@ -17,7 +17,7 @@ provider "aws" {
 resource "aws_security_group" "aws-striim-sg" {
   name        = "striim-security-groupo"
   description = "Allow incoming connections"
-  vpc_id      =  "vpc-104df574"   
+  vpc_id      =  var.vpc_id 
   ingress {
     from_port   = 80
     to_port     = 80
@@ -60,10 +60,10 @@ data "aws_ami" "amazon-linux-2" {
 resource "aws_instance" "aws-ec2-server" {
   ami                    = data.aws_ami.amazon-linux-2.id
   instance_type          = var.vm_instance_type
-  subnet_id              = "subnet-d1806f89"
+  subnet_id              = var.subnet_id
   vpc_security_group_ids = [aws_security_group.aws-striim-sg.id]
   source_dest_check      = false
-  key_name               = "simson_dev"
+  key_name               = var.key_name
   associate_public_ip_address = var.vm_associate_public_ip_address
   
   # root disk

@@ -48,3 +48,20 @@ variable "vm_data_volume_type" {
   description = "Data volume type of the EC2 Instance"
   default     = "gp2"
 }
+
+variable "subnet_id" {
+  type        = string
+  description = "Subnet Id"
+  default     = "subnet-d1806f89"
+}
+
+variable "vpc_id" {
+  type        = string
+  description = "VPC Id"
+  default     = "vpc-104df574"
+}
+variable "key_name" {
+  type        = string
+  description = "Key name"
+  default     = "simson_dev"
+}
