@@ -9,11 +9,12 @@ on:
     branches: [ "main" ]
     paths:
       - instance-builds/**
+      - .github/workflows/instance-builds.yml
   pull_request:
     branches: [ "main" ]
     paths:
       - instance-builds/**
-      
+      - .github/workflows/instance-builds.yml
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
@@ -37,7 +38,7 @@ jobs:
       - uses: actions/checkout@v3
       
       # Runs a single command using the runners shell
-      - name: Install Terraform
+      - name: Install Terraform and Git
         run: |
           sudo apt-get update && sudo apt-get install -y gnupg software-properties-common
           wget -O- https://apt.releases.hashicorp.com/gpg | \
@@ -48,9 +49,19 @@ jobs:
               sudo tee /etc/apt/sources.list.d/hashicorp.list
           sudo apt update
           sudo apt-get install terraform
+          sudo apt install git
+      
       - name: Run Terraform
         run: |
           cd instance-builds/
           terraform init
           terraform plan
           terraform apply -auto-approve
+      
+      - name: Save Terraform state
+        run: |
+          git status
+          git add -A
+          git commit -m 'saving tf state'
+          git push
+          
