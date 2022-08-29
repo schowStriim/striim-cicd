@@ -23,8 +23,8 @@ jobs:
     
     # Set environment variables
     env:
-      TF_VAR_AWS_ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY }}
-      TF_VAR_AWS_SECRET_KEY: ${{ secrets.AWS_SECRET_KEY }}
+      TF_VAR_aws_access_key: ${{ secrets.AWS_ACCESS_KEY }}
+      TF_VAR_aws_secret_key: ${{ secrets.AWS_SECRET_KEY }}
     
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
