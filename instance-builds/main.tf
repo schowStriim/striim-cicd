@@ -56,7 +56,7 @@ data "aws_ami" "amazon-linux-2" {
   }
 }
 
-# Create EC2 Instance
+# Create EC2 Instance with the custom image
 resource "aws_instance" "aws-ec2-server" {
   ami                    = data.aws_ami.amazon-linux-2.id
   instance_type          = var.vm_instance_type
