@@ -182,7 +182,7 @@ resource "aws_lambda_permission" "allow_cloudwatch_stop" {
 }
 
 resource "aws_lambda_function" "start_ec2_lambda" {
-  filename      = "ec2_lambda_handler.zip"
+  filename      = data.archive_file.lambda_zip.output_path
   function_name = "startEC2Lambda"
   role          = "${aws_iam_role.stop_start_ec2_role.arn}"
   handler       = "ec2_lambda_handler.start"
