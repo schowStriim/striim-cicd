@@ -146,17 +146,17 @@ resource "aws_iam_role_policy_attachment" "lambda_role_policy" {
 
 data "archive_file" "lambda_zip" {
     type        = "zip"
-    source_dir  = "${path.module}/ec2-lambda-handler"
+    source_dir  = "${path.module}/ec2-lambda-handler/"
     output_path = "${path.module}/ec2-lambda-handler.zip"
 }
 
 resource "aws_lambda_function" "stop_ec2_lambda" {
-  filename      = "ec2_lambda_handler.zip"
+  filename      = data.archive_file.lambda_zip.output_path
   function_name = "stopEC2Lambda"
   role          = "${aws_iam_role.stop_start_ec2_role.arn}"
   handler       = "ec2_lambda_handler.stop"
 
-  source_code_hash = "${data.archive_file.lambda_zip.output_base64sha256}"
+  #source_code_hash = "${data.archive_file.lambda_zip.output_base64sha256}"
 
   runtime = "python3.7"
   memory_size = "250"
