@@ -6,7 +6,7 @@ name: Instance builds pipeline
 on:
   # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
-    branches: [ "main" ]
+    branches: [ "lambda-start-stop-ec2" ]
     paths:
       - instance-builds/**
       - .github/workflows/instance-builds.yml
