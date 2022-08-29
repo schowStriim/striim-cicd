@@ -46,4 +46,6 @@ jobs:
       - name: Run Terraform
         run: |
           cd instance-builds/
+          terraform init
+          terraform plan
           terraform apply -auto-approve
