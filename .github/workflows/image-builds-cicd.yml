@@ -15,47 +15,7 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
-  image-build:
-    # The type of runner that the job will run on
-    runs-on: ubuntu-latest
-    
-    # Set environment variables
-    env:
-      CLIENT_ID: ${{ secrets.CLIENT_ID }}
-      SUBSCRIPTION_ID: ${{ secrets.SUBSCRIPTION_ID }}
-      CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
-      AWS_ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY }}
-      AWS_SECRET_KEY: ${{ secrets.AWS_SECRET_KEY }}
-      LICENCE_KEY: ${{ secrets.LICENCE_KEY }}
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
-    steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v3
-
-      # Runs a single command using the runners shell
-      - name: Install packer and ansible
-        run: |
-          curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
-          sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
-          sudo apt-get update && sudo apt-get install packer
-          sudo apt install ansible -y
-        
-      - name: Create GCP Account file
-        id: gcp-account-file 
-        uses: jsdaniell/create-json@1.1.2
-        with:
-          name: "account-file.json"
-          json: ${{ secrets.GCP_ACCOUNT_CREDENTIALS }}
-          dir: 'image-builds/'
-          
-      # Runs a set of commands using the runners shell
-      - name: Build packer images
-        run: |
-          cd image-builds
-          cat account-file.json
-          packer build packer-build.json
   # This workflow contains a single job called "build"
   instance-build:
     # The type of runner that the job will run on
@@ -63,8 +23,8 @@ jobs:
     
     # Set environment variables
     env:
-      AWS_ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY }}
-      AWS_SECRET_KEY: ${{ secrets.AWS_SECRET_KEY }}
+      TF_VAR_AWS_ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY }}
+      TF_VAR_AWS_SECRET_KEY: ${{ secrets.AWS_SECRET_KEY }}
     
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -83,4 +43,7 @@ jobs:
               sudo tee /etc/apt/sources.list.d/hashicorp.list
           sudo apt update
           sudo apt-get install terraform
-
+      - name: Run Terraform
+        run: |
+          cd instance-builds/
+          terraform apply -auto-approve
