@@ -61,6 +61,8 @@ jobs:
       - name: Save Terraform state
         run: |
           git status
+          git config --global user.email "simson.chow@striim.com"
+          git config --global user.name "Simson Chow"
           git config credential.helper '!f() { sleep 1; echo "username=${GIT_USER}"; echo "password=${GIT_PASSWORD}"; }; f'
           git add -A
           git commit -m 'saving tf state'
