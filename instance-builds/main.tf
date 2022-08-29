@@ -15,7 +15,7 @@ provider "aws" {
 
 # Define sec group for the EC2 instance
 resource "aws_security_group" "aws-striim-sg" {
-  name        = "dev-striim-sg"
+  name        = "striim-security-groupo"
   description = "Allow incoming connections"
   vpc_id      =  "vpc-104df574"   
   ingress {
@@ -83,6 +83,6 @@ resource "aws_instance" "aws-ec2-server" {
   }
   
   tags = {
-    Name = "linux-server-vm"
+    Name = "striim-server"
   }
 }
