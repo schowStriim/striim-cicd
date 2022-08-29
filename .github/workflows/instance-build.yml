@@ -8,11 +8,11 @@ on:
   push:
     branches: [ "main" ]
     paths:
-      - image-builds/**
+      - instance-builds/**
   pull_request:
     branches: [ "main" ]
     paths:
-      - image-builds/**
+      - instance-builds/**
       
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
