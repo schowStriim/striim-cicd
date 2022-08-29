@@ -146,8 +146,8 @@ resource "aws_iam_role_policy_attachment" "lambda_role_policy" {
 
 data "archive_file" "lambda_zip" {
     type        = "zip"
-    source_dir  = "ec2-lambda-handler"
-    output_path = "ec2-lambda-handler.zip"
+    source_dir  = "${path.module}/ec2-lambda-handler"
+    output_path = "${path.module}/ec2-lambda-handler.zip"
 }
 
 resource "aws_lambda_function" "stop_ec2_lambda" {
