@@ -1,5 +1,5 @@
 import boto3
-region = 'eu-central-1'
+region = 'us-west-2'
 ec2 = boto3.client('ec2', region_name=region)
 response = ec2.describe_instances(Filters=[
         {
