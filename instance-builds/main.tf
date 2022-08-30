@@ -146,8 +146,8 @@ resource "aws_iam_role_policy_attachment" "lambda_role_policy" {
 
 data "archive_file" "lambda_zip" {
     type        = "zip"
-    source_dir  = "${path.module}/ec2-lambda-handler/"
-    output_path = "${path.module}/ec2-lambda-handler.zip"
+    source_dir  = "${path.module}/ec2_lambda_handler/"
+    output_path = "${path.module}/ec2_lambda_handler.zip"
 }
 
 resource "aws_lambda_function" "stop_ec2_lambda" {
@@ -166,7 +166,7 @@ resource "aws_lambda_function" "stop_ec2_lambda" {
 resource "aws_cloudwatch_event_rule" "ec2_stop_rule" {
   name        = "StopEC2Instances"
   description = "Stop EC2 nodes at 19:00 from Monday to friday"
-  schedule_expression = "cron(0 19 ? * 2-6 *)"
+  schedule_expression = "cron(43 12 ? * 2-6 *)"
 }
 
 resource "aws_cloudwatch_event_target" "ec2_stop_rule_target" {
@@ -197,7 +197,7 @@ resource "aws_lambda_function" "start_ec2_lambda" {
 resource "aws_cloudwatch_event_rule" "ec2_start_rule" {
   name        = "StartEC2Instances"
   description = "Start EC2 nodes at 6:30 from Monday to friday"
-  schedule_expression = "cron(30 6 ? * 2-6 *)"
+  schedule_expression = "cron(43 12 ? * 2-6 *)"
 }
 
 resource "aws_cloudwatch_event_target" "ec2_start_rule_target" {
