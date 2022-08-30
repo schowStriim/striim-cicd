@@ -157,8 +157,6 @@ resource "aws_lambda_function" "stop_ec2_lambda" {
   role          = "${aws_iam_role.stop_start_ec2_role.arn}"
   handler       = "ec2_lambda_handler.stop"
 
-  #source_code_hash = "${data.archive_file.lambda_zip.output_base64sha256}"
-
   runtime = "python3.7"
   memory_size = "250"
   timeout = "60"
