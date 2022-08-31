@@ -4,11 +4,6 @@
   become_user: root
   become_method: sudo
   tasks:
-    - name: Copy striim install bash script
-      copy:
-        src: "files/striim_install.sh"
-        dest: "/root/striim_install.sh"
-   
     - name: Download Java
       get_url:
         url: "https://striim-downloads.s3.us-west-1.amazonaws.com/jdk-8u341-linux-x64.tar.gz"
@@ -40,10 +35,7 @@
         - { src: "files/sks.jks", dest: "/opt/Striim/conf/" }
         - { src: "files/sksKey.pwd", dest: "/opt/Striim/conf/" }
         - { src: "files/startUp.properties", dest: "/opt/Striim/conf/" }
-    
-    - name: Execute Striim
-      shell: "/bin/bash /opt/Striim/bin/server.sh"
-    
+
     # Install PostgreSQL 
     - name: Install packages
       yum:
@@ -53,6 +45,11 @@
           - postgresql-contrib
           - postgresql-libs
         state: present
+    
+    - name: Copy pg_hba.conf file 
+      copy:
+        src: "files/psql_config/pg_hba.conf"
+        dest: "/var/lib/pgsql/data/"
 
     - name: Check if PostgreSQL is initialized
       stat:
