@@ -1,8 +1,11 @@
 import boto3
 import os
 
-ec2 = boto3.client('ec2')
+region = os.environ.get('AWS_REGION')
+
+ec2 = boto3.client('ec2', region_name=region)
 rds = boto3.client('rds')
+rds_instances = []
 ec2_instances = []
 
 rds_response = rds.describe_db_instances()
@@ -12,7 +15,7 @@ def rds_instance(response, state):
     # Locate all instances that are tagged ttl.
     for instance in rds_response["DBInstances"]:
         
-        if instance['DBInstanceStatus'] == 'available' or instance['DBInstanceStatus'] == 'stopped':
+        if instance['DBInstanceStatus'] == state:
             
             tags = rds.list_tags_for_resource(ResourceName=instance["DBInstanceArn"])
                     
@@ -25,6 +28,7 @@ def rds_instance(response, state):
                             print("Stopped RDS Instance: ", instance["DBInstanceIdentifier"])
                         
                         elif state == 'stopped':
+                            
                             rds.start_db_instance(DBInstanceIdentifier=instance["DBInstanceIdentifier"])
                             print("Started RDS Instance: ", instance["DBInstanceIdentifier"])
 
@@ -64,3 +68,4 @@ def start(event, context):
         print('Started EC2 instances: ' + str(ec2_instances))
     else: 
         print('No Instances with Auto-Start tag.')
+
