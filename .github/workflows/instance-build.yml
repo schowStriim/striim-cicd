@@ -58,14 +58,3 @@ jobs:
           terraform plan
           terraform apply -auto-approve
       
-      - name: Save Terraform state
-        run: |
-          git config --global user.email "simson.chow@striim.com"
-          git config --global user.name "Simson Chow"
-          git config credential.helper '!f() { sleep 1; echo "username=${GIT_USER}"; echo "password=${GIT_PASSWORD}"; }; f'
-          git add -A
-          sleep 3
-          git commit -m 'saving tf state'
-          sleep 3
-          git push
-          

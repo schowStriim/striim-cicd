@@ -1,4 +1,12 @@
 terraform {
+  backend "s3" {
+    bucket = "terraform-state-business-dev"
+    key = "global/s3/terraform.tfstate"
+    region = "us-west-2"
+    dynamodb_table = "terraform-state-locking"
+    encrypt = true
+  }
+
   required_providers {
     aws = {
       source  = "hashicorp/aws"
@@ -13,9 +21,37 @@ provider "aws" {
   region     = var.aws_region
 }
 
+resource "aws_s3_bucket" "terraform_state"{
+  bucket = "terraform-state-business-dev"
+  lifecycle {
+    prevent_destroy = true
+  }
+  versioning {
+    enabled = true
+  }
+  server_side_encryption_configuration{
+    rule {
+      apply_server_side_encryption_by_default {
+        sse_algorithm = "AES256"
+      }
+    }
+  }
+}
+
+resource "aws_dynamodb_table" "terraform_locks"{
+  name = "terraform-state-locking"
+  billing_mode = "PAY_PER_REQUEST"
+  hash_key = "LockID"
+
+  attribute {
+    name = "LockID"
+    type = "S"
+  }
+}
+
 # Define sec group for the EC2 instance
 resource "aws_security_group" "aws-striim-sg" {
-  name        = "striim-security-groupo"
+  name        = "striim-security-group"
   description = "Allow incoming connections"
   vpc_id      =  var.vpc_id 
   ingress {
