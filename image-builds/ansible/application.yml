@@ -59,10 +59,4 @@
     - name: Initialize PostgreSQL
       shell: "postgresql-setup initdb"
       when: not postgres_data.stat.exists
-
-    - name: Start and enable service
-      service:
-        name: postgresql
-        state: started
-        enabled: true
        
