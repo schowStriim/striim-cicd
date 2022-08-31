@@ -22,7 +22,7 @@ variable "vm_instance_type" {
 variable "vm_associate_public_ip_address" {
   type        = bool
   description = "Associate a public IP address to the EC2 instance"
-  default     = false
+  default     = true
 }
 
 variable "vm_root_volume_size" {
