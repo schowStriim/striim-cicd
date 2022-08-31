@@ -61,9 +61,7 @@
         state: started
         enabled: true
  
-   - name: Copy pg_hba.conf file 
+   - name: Copy pg_hba.conf file
      copy:
-       src: "files/psql_config/pg_hba.conf"
-       dest: "/var/lib/pgsql/data/"
-
-
+      src: "files/psql_config/pg_hba.conf"
+      dest: "/var/lib/pgsql/data/"
