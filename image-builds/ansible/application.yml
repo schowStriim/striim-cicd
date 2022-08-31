@@ -45,11 +45,6 @@
           - postgresql-contrib
           - postgresql-libs
         state: present
-    
-    - name: Copy pg_hba.conf file 
-      copy:
-        src: "files/psql_config/pg_hba.conf"
-        dest: "/var/lib/pgsql/data/"
 
     - name: Check if PostgreSQL is initialized
       stat:
