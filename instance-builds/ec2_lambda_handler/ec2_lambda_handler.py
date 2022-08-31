@@ -1,11 +1,8 @@
 import boto3
-import os
 
-region = os.environ.get('AWS_REGION')
-
-ec2 = boto3.client('ec2', region_name=region)
+ec2 = boto3.client('ec2')
 rds = boto3.client('rds')
-rds_instances = []
+
 ec2_instances = []
 
 rds_response = rds.describe_db_instances()
@@ -24,6 +21,7 @@ def rds_instance(response, state):
                     if tag['Value'] == 'true':
                             
                         if state == 'available':
+
                             rds.stop_db_instance(DBInstanceIdentifier=instance["DBInstanceIdentifier"])
                             print("Stopped RDS Instance: ", instance["DBInstanceIdentifier"])
                         
@@ -68,4 +66,3 @@ def start(event, context):
         print('Started EC2 instances: ' + str(ec2_instances))
     else: 
         print('No Instances with Auto-Start tag.')
-
