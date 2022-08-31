@@ -8,6 +8,6 @@
 
 ### How to use this CI/CD pipeline:
 1) To deploy a new image version to all cloud provider:
-  - Click on 'Actions' tab.
-  - Select 'Image builds pipeline' on the left panel.
-  - Click on 'Run Workflow' dropdown, select 'main' branch to get the latest changes and then click on 'Run workflow' button.
+    - Click on 'Actions' tab.
+    - Select 'Image builds pipeline' on the left panel.
+    - Click on 'Run Workflow' dropdown, select 'main' branch to get the latest changes and then click on 'Run workflow' button.
