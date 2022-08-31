@@ -22,7 +22,7 @@ variable "vm_instance_type" {
 variable "vm_associate_public_ip_address" {
   type        = bool
   description = "Associate a public IP address to the EC2 instance"
-  default     = true
+  default     = false
 }
 
 variable "vm_root_volume_size" {
@@ -63,5 +63,5 @@ variable "vpc_id" {
 variable "key_name" {
   type        = string
   description = "Key name"
-  default     = "simson_dev"
+  default     = "striim_key"
 }

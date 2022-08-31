@@ -48,20 +48,20 @@ resource "aws_security_group" "aws-striim-sg" {
   name        = "striim-security-group"
   description = "Allow incoming connections"
   vpc_id      =  var.vpc_id 
-  ingress {
-    from_port   = 80
-    to_port     = 80
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-    description = "Allow incoming HTTP connections"
-  }
- ingress {
-    from_port   = 22
-    to_port     = 22
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-    description = "Allow incoming SSH connections (Linux)"
-  }
+  #ingress {
+  #  from_port   = 80
+  #  to_port     = 80
+  #  protocol    = "tcp"
+  #  cidr_blocks = ["0.0.0.0/0"]
+  #  description = "Allow incoming HTTP connections"
+  #}
+ #ingress {
+ #   from_port   = 22
+ #   to_port     = 22
+ #   protocol    = "tcp"
+ #   cidr_blocks = ["0.0.0.0/0"]
+ #   description = "Allow incoming SSH connections (Linux)"
+ # }
  ingress {
     from_port   = 0
     to_port     = 65535
