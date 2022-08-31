@@ -46,11 +46,6 @@
           - postgresql-libs
         state: present
     
-    - name: Copy pg_hba.conf file 
-      copy:
-        src: "files/psql_config/pg_hba.conf"
-        dest: "/var/lib/pgsql/data/"
-
     - name: Check if PostgreSQL is initialized
       stat:
         path: "/var/lib/pgsql/data/pg_hba.conf"
@@ -59,4 +54,16 @@
     - name: Initialize PostgreSQL
       shell: "postgresql-setup initdb"
       when: not postgres_data.stat.exists
-       
+      
+   - name: Start and enable service
+      service:
+        name: postgresql
+        state: started
+        enabled: true
+ 
+   - name: Copy pg_hba.conf file 
+     copy:
+       src: "files/psql_config/pg_hba.conf"
+       dest: "/var/lib/pgsql/data/"
+
+
