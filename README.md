@@ -22,4 +22,8 @@
      - Login to your AWS console and go to EC2 console.
      - Search for an instance named 'striim-server'.
      - Grab the ssh command after the 'Connect' button. (i.e. `ssh -i "<path>/<to>/<key>/striim_key.pem" ec2-user@ec2-54-213-129-76.us-west-2.compute.amazonaws.com`.
-     - Execute the command in your terminal and enter 'yes' when it asks you to permanently save the hostname.
+     - Execute the command in your terminal and access your striim instance.
+     - Once inside of your instance, go to `/op/Striim/bin/` directory.
+     - Run `sudo ./server.sh` and wait until it's succesfully done.
+     - Grab your intance public IP and type in the following in your web browser: `<public IP>:9080`
+      
