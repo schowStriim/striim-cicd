@@ -8,12 +8,14 @@
     - name: Install packages
       yum:
         name:
-          - python3-psycopg2
           - postgresql
           - postgresql-server
           - postgresql-contrib
           - postgresql-libs
         state: present
+  
+    - name: Python install psycopg2
+      shell: "python3 -m pip install psycopg2-binary"
 
     - name: Check if PostgreSQL is initialized
       stat:
