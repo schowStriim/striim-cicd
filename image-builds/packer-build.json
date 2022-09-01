@@ -21,30 +21,44 @@
             "managed_image_name": "azure-centos-striim-image-{{timestamp}}",
             "managed_image_resource_group_name": "myResourceGroup"
         },
-        {
+       {
             "type": "amazon-ebs",
             "access_key": "{{user `aws_access_key`}}",
             "secret_key": "{{user `aws_secret_key`}}",
             "region": "us-west-2",
             "ami_name": "aws-centos-striim-image-{{timestamp}}",
             "source_ami": "ami-0cea098ed2ac54925",
-            "instance_type": "t2.micro",
-            "ssh_username": "ec2-user"
+            "instance_type": "t2.xlarge",
+            "ssh_username": "ec2-user",
+            "launch_block_device_mappings": [
+                {
+                  "delete_on_termination": true,
+                  "device_name": "/dev/xvda",
+                  "volume_size": 50,
+                  "volume_type": "gp2"
+                }
+            ]
         },
     	{
-      	   "type": "googlecompute",
-           "project_id": "ancient-yeti-175123",
-           "source_image": "centos-7-v20220719",
-           "zone": "us-central1-a",
-	   "image_name": "gcp-centos-striim-image-{{timestamp}}",
-           "ssh_username": "dev-gcp-image",
-           "account_file": "account-file.json"
-    	}
+            "type": "googlecompute",
+            "project_id": "ancient-yeti-175123",
+            "source_image": "centos-7-v20220719",
+            "zone": "us-central1-a",
+            "image_name": "gcp-centos-striim-image-{{timestamp}}",
+            "ssh_username": "dev-gcp-image",
+            "account_file": "account-file.json"
+       }
     ],
     "provisioners":[
-        {
+        {   
+            "only": ["googlecompute", "azure-arm"],
             "type": "ansible",
-            "playbook_file": "ansible/application.yml"
+            "playbook_file": "ansible/striim_default_application.yml"
+        },
+        {   
+            "only": ["amazon-ebs"],
+            "type": "ansible",
+            "playbook_file": "ansible/striim_psql_application.yml"
         }
     ]
 }
