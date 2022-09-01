@@ -2,9 +2,10 @@
 ### The purpose of this CI/CD pipeline is to deploy PoC infrastructure/resources to all cloud providers (AWS, Azure, and Google Cloud).
 
 1) Deploys Striim images to all cloud providers.
-    - Java JDK (1.8) installed.
+    - Java JDK (1.8)
     - Striim (4.1.0)
     - PostgreSQL server
+    - PostgreSQL source and target databases, users, tables and dummy data
 2) Deploys Striim server to AWS as an EC2 instance with the latest image attached.
 3) Deploys instance scheduler infrastructure to AWS.
 4) Defines the CI/CD pipeline using Github Actions tools.
