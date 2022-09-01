@@ -22,7 +22,7 @@ resource "aws_s3_bucket" "terraform_state"{
   }
 }
 
-resource "aws_s3_bucket_versioning" "versioning_example" {
+resource "aws_s3_bucket_versioning" "terraform_bucket_versioning" {
   bucket = aws_s3_bucket.terraform_state.id
   versioning_configuration {
     status = "Enabled"
