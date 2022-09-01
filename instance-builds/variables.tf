@@ -27,7 +27,7 @@ variable "vm_associate_public_ip_address" {
 
 variable "vm_root_volume_size" {
   type        = number
-  default     = 20
+  default     = 50
   description = "Root Volume size of the EC2 Instance"
 }
 
