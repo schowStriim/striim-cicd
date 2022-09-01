@@ -8,7 +8,7 @@
     - name: Install packages
       yum:
         name:
-          - python-psycopg2
+          - python3-psycopg2
           - postgresql
           - postgresql-server
           - postgresql-contrib
