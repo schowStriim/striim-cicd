@@ -16,7 +16,7 @@ variable "aws_region" {
 variable "vm_instance_type" {
   type        = string
   description = "EC2 instance type"
-  default     = "t3.small"
+  default     = "m5.4xlarge"
 }
 
 variable "vm_associate_public_ip_address" {
