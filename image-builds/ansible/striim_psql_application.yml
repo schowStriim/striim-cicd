@@ -15,11 +15,8 @@
         state: present
   
     - name: Python install psycopg2
-      shell: |
-        if ! type "python3" > /dev/null; then
-           sudo yum install python3         
-        fi
-        "python3 -m pip install psycopg2-binary"
+      shell: "python3 -m pip install psycopg2-binary"
+    
     - name: Check if PostgreSQL is initialized
       stat:
         path: "/var/lib/pgsql/data/pg_hba.conf"
