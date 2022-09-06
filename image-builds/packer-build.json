@@ -53,7 +53,7 @@
         {   
             "only": ["googlecompute", "azure-arm"],
             "type": "ansible",
-            "playbook_file": "ansible/striim_psql_application.yml"
+            "playbook_file": "ansible/striim_default_application.yml"
         },
         {   
             "only": ["amazon-ebs"],
