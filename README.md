@@ -11,7 +11,7 @@
 4) Defines the CI/CD pipeline using Github Actions tools.
 
 ### How to use this pipeline:
-1) To deploy a new Striim image version to all cloud provider:
+1) To deploy a new Striim image version to all cloud providers:
     - Click on 'Actions' tab.
     - Select 'Image builds pipeline' on the left panel.
     - Click on 'Run Workflow' dropdown, select 'main' branch to get the latest changes and then click on 'Run workflow' button.
@@ -22,12 +22,16 @@
     - Click on 'Run Workflow' dropdown, select 'main' branch to get the latest changes and then click on 'Run workflow' button.
     
     To access and run the Striim server:
-     - Ask your admin to provide you the striim_key.pem key.
      - Login to your AWS console and go to EC2 console.
+     - Ask your admin to provide you the striim_key.pem key.
      - Search for an instance named 'striim-server'.
      - Grab the ssh command after the 'Connect' button. (i.e. `ssh -i "<path>/<to>/<key>/striim_key.pem" ec2-user@ec2-54-213-129-76.us-west-2.compute.amazonaws.com`.
      - Execute the command in your terminal and access your striim instance.
      - Once inside of your instance, go to `/op/Striim/bin/` directory.
      - Run `sudo ./server.sh` and wait until it's succesfully done.
      - Grab your intance public IP and type in the following in your web browser: `<public IP>:9080`
+
+3) To access the PostgreSQL database in the EC2 instance, run the following command:
+    - `psql -h localhost -U postgres -d source_db`
+ 
       
