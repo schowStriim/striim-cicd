@@ -33,7 +33,7 @@
 
 3) To access the PostgreSQL database in the EC2 instance, run the following command:
     - `psql -h localhost -U postgres -d source_db`
-    To access/view Postgres schema, table or data, run the following:
+    - To access/view Postgres schema, table or data, run the following:
         - `set search_path to source_schema;` -> Sets the schema.
         - `\dt` -> View all tables.
         - `SELECT COUNT(*) FROM employee` -> Make sure there's ~1.5 Million records in the table.
