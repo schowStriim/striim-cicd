@@ -8,6 +8,7 @@
     - name: Install packages
       yum:
         name:
+          - python3
           - postgresql
           - postgresql-server
           - postgresql-contrib
