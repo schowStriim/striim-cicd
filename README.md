@@ -21,7 +21,8 @@
     - Select 'Instance builds pipeline' on the left panel.
     - Click on 'Run Workflow' dropdown, select 'main' branch to get the latest changes and then click on 'Run workflow' button.
     
-    To access and run the Striim server:
+### How to start Striim server and accessing PostgreSQL database:
+1) To access and run the Striim server:
      - Login to your AWS console and go to EC2 console.
      - Ask your admin to provide you the striim_key.pem key.
      - Search for an instance named 'striim-server'.
@@ -31,7 +32,7 @@
      - Run `sudo ./server.sh` and wait until it's succesfully done.
      - Grab your intance public IP and type in the following in your web browser: `<public IP>:9080`
 
-3) To access the PostgreSQL database in the EC2 instance, run the following command:
+2) To access the PostgreSQL database in the EC2 instance, run the following command:
     - `psql -h localhost -U postgres -d source_db`
     - To access/view Postgres schema, table or data, run the following:
         - `set search_path to source_schema;` -> Sets the schema.
