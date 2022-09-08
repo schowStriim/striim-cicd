@@ -73,3 +73,6 @@ sudo systemctl enable striim-node
 sudo systemctl start striim-node
 sudo systemctl status striim-node
 echo "${GREEN} Succesfully started Striim node and dbms ${NC}"
+
+#Verify instance is running
+sudo tail -F /opt/striim/logs/striim-node.log
