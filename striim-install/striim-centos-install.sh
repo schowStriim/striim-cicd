@@ -1,3 +1,21 @@
+################################################################################################
+# DESCRIPTION: (CentOS) This bash script does the following:                                   # 
+# 1) Installs Java JDK (1.8).                                                                  #
+# 2) Installs Striim (4.1.0.1).                                                                # 
+# 3) Sets up Striim configuration (startup.properties and runs sksConfig file).                #
+# 4) Enables/Starts Striim dbms and node.                                                      #
+#                                                                                              # 
+# PRE-REQUISITE:                                                                               #
+# 1) This script is only for CentOS or Amazon Linux 2 operating system.                        #
+# 2) Need to export your striim licence (example shown below) as environment variables         # 
+#    before executing this script.                                                             # 
+#                                                                                              #
+# For example:                                                                                 #
+# export licence_key=<value>                                                                   #
+# export product_key=<value>                                                                   #
+# export cluster_name=<value>                                                                  #
+# export company_name=<value>                                                                  #
+#################################################################################################
 GREEN=$'\e[0;32m'
 RED=$'\e[0;31m'
 NC=$'\e[0m'
