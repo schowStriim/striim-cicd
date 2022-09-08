@@ -67,7 +67,9 @@ echo "${GREEN} Successfully updated startup.properties file ${NC}"
 
 sudo systemctl enable striim-dbms
 sudo systemctl start striim-dbms
+sudo systemctl status striim-dbms
 sleep 5
 sudo systemctl enable striim-node
 sudo systemctl start striim-node
+sudo systemctl status striim-node
 echo "${GREEN} Succesfully started Striim node and dbms ${NC}"
