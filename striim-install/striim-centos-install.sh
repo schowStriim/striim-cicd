@@ -20,3 +20,10 @@ sed -i 's/WAClusterName=/'"WAClusterName=$cluster_name"'/' $startup_config
 sed -i 's/CompanyName=/'"CompanyName=$company_name"'/' $startup_config
 sed -i 's/# ProductKey=/'"ProductKey=$product_key"'/' $startup_config
 sed -i 's/# LicenceKey=/'"LicenceKey=$licence_key"'/' $startup_config
+
+# Start and enable Striim dbms and node
+sudo systemctl enable striim-dbms
+sudo systemctl start striim-dbms
+sleep 5
+sudo systemctl enable striim-node
+sudo systemctl start striim-node
