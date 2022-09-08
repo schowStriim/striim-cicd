@@ -1,5 +1,4 @@
 # Install Java JDK (1.8)
-
 curl -0 -L https://striim-downloads.s3.us-west-1.amazonaws.com/jdk-8u341-linux-x64.tar.gz --output jdk-8u341-linux-x64.tar.gz
 mkdir -p /usr/lib/jvm
 tar zxvf jdk-8u341-linux-x64.tar.gz -C /usr/lib/jvm
@@ -11,3 +10,6 @@ curl -L https://striim-downloads.striim.com/Releases/4.1.0.1/striim-dbms-4.1.0.1
 curl -L https://striim-downloads.striim.com/Releases/4.1.0.1/striim-node-4.1.0.1-Linux.rpm --output striim-node-4.1.0.1-Linux.rpm
 rpm -ivh striim-dbms-4.1.0.1-Linux.rpm
 rpm -ivh striim-node-4.1.0.1-Linux.rpm
+
+# Setup Striim's credentials
+sudo su - striim /opt/striim/bin/sksConfig.sh
