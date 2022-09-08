@@ -1,3 +1,5 @@
+startup_config=/opt/striim/conf/startUp.properties
+
 # Install Java JDK (1.8)
 curl -0 -L https://striim-downloads.s3.us-west-1.amazonaws.com/jdk-8u341-linux-x64.tar.gz --output jdk-8u341-linux-x64.tar.gz
 mkdir -p /usr/lib/jvm
@@ -13,3 +15,8 @@ sudo rpm -ivh striim-node-4.1.0.1-Linux.rpm
 
 # Setup Striim's credentials
 sudo su - striim /opt/striim/bin/sksConfig.sh
+
+sed -i 's/WAClusterName=/'"WAClusterName=$cluster_name"'/' $startup_config
+sed -i 's/CompanyName=/'"CompanyName=$company_name"'/' $startup_config
+sed -i 's/# ProductKey=/'"ProductKey=$product_key"'/' $startup_config
+sed -i 's/# LicenceKey=/'"LicenceKey=$licence_key"'/' $startup_config
