@@ -4,6 +4,21 @@ NC=$'\e[0m'
 
 startup_config=/opt/striim/conf/startUp.properties
 
+# Check to see if environment variables are set to configure startup.properties file
+if [[ -z "$company_name" ]]; then
+    echo "${RED} Must provide company_name in environment ${NC} " 1>&2
+    exit 1
+elif [[ -z "$cluster_name" ]]; then
+    echo "${RED} Must provide cluster_name in environment ${NC} " 1>&2
+    exit 1
+elif [[ -z "$licence_key" ]]; then
+    echo "${RED} Must provide licence_key in environment ${NC} " 1>&2
+    exit 1
+elif [[ -z "$product_key" ]]; then
+    echo "${RED} Must provide product_key in environment ${NC} " 1>&2
+    exit 1
+fi
+
 # Install Java JDK (1.8)
 echo "${GREEN} Install Java JDK 1.8 ${NC}"
 curl -0 -L https://striim-downloads.s3.us-west-1.amazonaws.com/jdk-8u341-linux-x64.tar.gz --output jdk-8u341-linux-x64.tar.gz
