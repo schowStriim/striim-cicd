@@ -20,7 +20,7 @@ def rds_instance(response, state):
                 if tag['Key'] == 'Auto-Start':
                     if tag['Value'] == 'true':
                             
-                        elif state == 'stopped':
+                        if state == 'stopped':
                             
                             rds.start_db_instance(DBInstanceIdentifier=instance["DBInstanceIdentifier"])
                             print("Started RDS Instance: ", instance["DBInstanceIdentifier"])
