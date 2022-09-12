@@ -20,15 +20,18 @@ def rds_instance(response, state):
                 if tag['Key'] == 'Auto-Start':
                     if tag['Value'] == 'true':
                             
-                        if state == 'available':
-
-                            rds.stop_db_instance(DBInstanceIdentifier=instance["DBInstanceIdentifier"])
-                            print("Stopped RDS Instance: ", instance["DBInstanceIdentifier"])
-                        
                         elif state == 'stopped':
                             
                             rds.start_db_instance(DBInstanceIdentifier=instance["DBInstanceIdentifier"])
                             print("Started RDS Instance: ", instance["DBInstanceIdentifier"])
+                
+                if tag['Key'] == 'Auto-Stop':
+                    if tag['Value'] == 'true':
+                            
+                        if state == 'available':
+
+                            rds.stop_db_instance(DBInstanceIdentifier=instance["DBInstanceIdentifier"])
+                            print("Stopped RDS Instance: ", instance["DBInstanceIdentifier"])
 
 def describe_ec2_instances(state):
 
