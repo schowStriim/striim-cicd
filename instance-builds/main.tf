@@ -108,7 +108,7 @@ resource "aws_instance" "aws-ec2-server" {
   
   tags = {
     Name = "striim-server",
-    Auto-Start = "true"
+    Auto-Stop = "true"
   }
 }
 
