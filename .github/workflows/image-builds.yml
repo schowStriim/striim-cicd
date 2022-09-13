@@ -58,5 +58,4 @@ jobs:
       - name: Build packer images
         run: |
           cd image-builds
-          cat account-file.json
           packer build packer-build.json
