@@ -58,9 +58,9 @@ jobs:
         id: gcp-account-file 
         uses: jsdaniell/create-json@1.1.2
         with:
-          name: "account-file.json"
+          name: "ancient-yeti-175123-0406e56fca15.json"
           json: ${{ secrets.GCP_INSTANCE_ACCOUNT_CREDENTIALS }}
-          dir: 'instance-builds/gcp_credentials/ancient-yeti-175123-0406e56fca15.json'
+          dir: 'instance-builds/gcp_credentials'
   
       - name: Run Terraform
         run: |
