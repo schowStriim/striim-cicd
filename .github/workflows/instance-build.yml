@@ -60,7 +60,7 @@ jobs:
         with:
           name: "ancient-yeti-175123-0406e56fca15.json"
           json: ${{ secrets.GCP_INSTANCE_ACCOUNT_CREDENTIALS }}
-          dir: 'instance-builds/gcp_credentials'
+          dir: 'instance-builds/'
   
       - name: Run Terraform
         run: |
