@@ -34,6 +34,7 @@ jobs:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_KEY }}
       AWS_DEFAULT_REGION: ${{ secrets.AWS_REGION }}
+      GCP_INSTANCE_ACCOUNT_CREDENTIALS: ${{ secrets.GCP_INSTANCE_ACCOUNT_CREDENTIALS }}
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
@@ -52,7 +53,16 @@ jobs:
           sudo apt update
           sudo apt-get install terraform
           sudo apt install git
+            - name: Create GCP Account file
       
+      - name: Create GCP Account file
+        id: gcp-account-file 
+        uses: jsdaniell/create-json@1.1.2
+        with:
+          name: "account-file.json"
+          json: ${{ secrets.GCP_INSTANCE_ACCOUNT_CREDENTIALS }}
+          dir: 'instance-builds/gcp_credentials/ancient-yeti-175123-0406e56fca15.json'
+  
       - name: Run Terraform
         run: |
           cd instance-builds/
