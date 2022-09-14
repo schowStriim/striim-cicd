@@ -11,7 +11,55 @@ terraform {
     aws = {
       source  = "hashicorp/aws"
       version = "~> 3.0"
+    }    
+    google = {
+      source = "hashicorp/google"
+      version = "4.11.0" # pinning version
     }
+  }
+}
+
+provider "google" {
+  credentials = file(format("%s/%s",path.module, var.gcp_credentials))
+  project     = var.project
+  region      = var.gcp_region
+  zone        = var.gcp_zone
+}
+
+#############
+# GCP       #
+#############
+
+# Create a single Compute Engine instance
+resource "google_compute_instance" "default" {
+  name         = "striim-server"
+  machine_type = var.machine_type
+  zone         = var.gcp_zone
+  tags         = ["ssh"]
+  resource_policies = [google_compute_resource_policy.auto_shutdown.self_link]
+  metadata = {
+    enable-oslogin = "TRUE"
+  }
+  boot_disk {
+    initialize_params {
+      image = var.custom_image
+    }
+  }
+
+  network_interface {
+    network = "default"
+  }
+}
+
+resource "google_compute_resource_policy" "auto_shutdown" {
+  name   = "striim-server-policy"
+  region = var.gcp_region
+  description = "Start and stop instances"
+  instance_schedule_policy {
+    vm_stop_schedule {
+      schedule = "0 20 * * *"
+    }
+    time_zone = "US/Central"
   }
 }
 

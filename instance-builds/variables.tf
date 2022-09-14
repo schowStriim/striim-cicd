@@ -65,3 +65,39 @@ variable "key_name" {
   description = "Key name"
   default     = "striim_key"
 }
+
+#########
+# GCP   #
+#########
+
+variable "project" {
+  type        = string
+  description = "GCP Project ID"
+  default = "ancient-yeti-175123"
+}
+
+variable "gcp_region" {
+  type        = string
+  description = "GCP region"
+  default = "us-central1"
+}
+
+variable "gcp_zone" {
+  type        = string
+  default = "us-central1-a"
+}
+
+variable "gcp_credentials" {
+  type = string
+  default= "/gcp_credentials/ancient-yeti-175123-0406e56fca15.json"
+}
+
+variable "machine_type" {
+  type = string
+  default= "e2-standard-4"
+}
+
+variable "custom_image" {
+  type = string
+  default = "gcp-centos-striim-image-1663159059"
+}
