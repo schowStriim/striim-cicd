@@ -5,14 +5,15 @@
   become_method: sudo
   tasks:
     # Install PostgreSQL 
-    - name: Install packages
+    - name: "Install PostgreSQL 14"
       yum:
+        state: latest
         name:
-          - python3
-          - postgresql
-          - postgresql-server
-          - postgresql-contrib
-          - postgresql-libs
+          - postgresql14
+          - postgresql14-server
+          - postgresql14-contrib
+          - postgresql14-devel
+          - postgresql14-libs
         state: present
     
     - name: Python install psycopg2
