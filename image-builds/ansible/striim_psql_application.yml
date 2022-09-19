@@ -1,32 +1,19 @@
+
 ---
 - hosts: all
   become: yes
   become_user: root
   become_method: sudo
   tasks:
-    - name: install epel
-      shell: "sudo amazon-linux-extras install epel"
-    
-    - name: Modify yum repos for Postgresql installation
-      shell: |
-        sudo tee /etc/yum.repos.d/pgdg.repo<<EOF
-        [pgdg13]
-        name=PostgreSQL 13 for RHEL/CentOS 7 - x86_64
-        baseurl=http://download.postgresql.org/pub/repos/yum/13/redhat/rhel-7-x86_64
-        enabled=1
-        gpgcheck=0
-        EOF
-       
-        # Install PostgreSQL 
-    - name: "Install PostgreSQL 13"
+    # Install PostgreSQL 
+    - name: Install packages
       yum:
-        state: latest
         name:
-          - postgresql13
-          - postgresql13-server
-          - postgresql13-contrib
-          - postgresql13-devel
-          - postgresql13-libs
+          - python3
+          - postgresql
+          - postgresql-server
+          - postgresql-contrib
+          - postgresql-libs
         state: present
     
     - name: Python install psycopg2

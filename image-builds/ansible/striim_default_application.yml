@@ -37,15 +37,13 @@
         - { src: "files/startUp.properties", dest: "/opt/Striim/conf/" }
 
     # Install PostgreSQL 
-    - name: "Install PostgreSQL 14"
+    - name: Install packages
       yum:
-        state: latest
         name:
-          - postgresql14
-          - postgresql14-server
-          - postgresql14-contrib
-          - postgresql14-devel
-          - postgresql14-libs
+          - postgresql
+          - postgresql-server
+          - postgresql-contrib
+          - postgresql-libs
         state: present
 
     - name: Check if PostgreSQL is initialized
