@@ -80,5 +80,5 @@ then
      sudo tail -F /opt/striim/logs/striim-node.log
 else
       echo "${RED} Striim installation failed. Please check logs. ${NC} " 1>&2
- exit 1
+      exit 1
 fi
