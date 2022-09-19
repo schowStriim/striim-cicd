@@ -52,25 +52,31 @@ curl -L https://striim-downloads.striim.com/Releases/4.1.0.1/striim-node-4.1.0.1
 sudo dpkg -i striim-dbms-4.1.0.1-Linux.deb
 sudo dpkg -i striim-node-4.1.0.1-Linux.deb
 
-# Setup Striim's credentials
-echo "${GREEN} Setup Striim Credentials ${NC}"
-sudo su - striim /opt/striim/bin/sksConfig.sh
+if [ -d "/opt/striim/bin" ]
+then
+    # Setup Striim's credentials
+    echo "${GREEN} Setup Striim Credentials ${NC}"
+    sudo su - striim /opt/striim/bin/sksConfig.sh
 
-sed -i 's/WAClusterName=/'"WAClusterName=$cluster_name"'/' $startup_config
-sed -i 's/CompanyName=/'"CompanyName=$company_name"'/' $startup_config
-sed -i 's/# ProductKey=/'"ProductKey=$product_key"'/' $startup_config
-sed -i 's/# LicenceKey=/'"LicenceKey=$licence_key"'/' $startup_config
+    sed -i 's/WAClusterName=/'"WAClusterName=$cluster_name"'/' $startup_config
+    sed -i 's/CompanyName=/'"CompanyName=$company_name"'/' $startup_config
+    sed -i 's/# ProductKey=/'"ProductKey=$product_key"'/' $startup_config
+    sed -i 's/# LicenceKey=/'"LicenceKey=$licence_key"'/' $startup_config
 
-echo "${GREEN} Successfully updated startup.properties file ${NC}"
+    echo "${GREEN} Successfully updated startup.properties file ${NC}"
 
-# Start and enable Striim dbms and node
+    # Start and enable Striim dbms and node
 
-sudo systemctl enable striim-dbms
-sudo systemctl start striim-dbms
-sleep 5
-sudo systemctl enable striim-node
-sudo systemctl start striim-node
-echo "${GREEN} Succesfully started Striim node and dbms ${NC}"
+    sudo systemctl enable striim-dbms
+    sudo systemctl start striim-dbms
+    sleep 5
+    sudo systemctl enable striim-node
+    sudo systemctl start striim-node
+    echo "${GREEN} Succesfully started Striim node and dbms ${NC}"
 
-#Verify instance is running
-sudo tail -F /opt/striim/logs/striim/striim-node.log
+    #Verify instance is running
+    sudo tail -F /opt/striim/logs/striim/striim-node.log
+else
+      echo "${RED} Striim installation failed. Please check logs. ${NC} " 1>&2
+      exit 1
+fi
