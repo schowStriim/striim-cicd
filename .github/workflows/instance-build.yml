@@ -43,7 +43,6 @@ jobs:
       # Runs a single command using the runners shell
       - name: Install Terraform and Git
         run: |
-          curl -v --request POST --url http://192.168.0.133:9080/api/v2/applications/admin.CDC_PostgreSQLToAzureDBForPostgreSQL/deployment --header 'Authorization: STRIIM-TOKEN 01ed55f1-7e77-7271-8b1a-26a379f11774' --header 'Content-Type: application/json'
           sudo apt-get update && sudo apt-get install -y gnupg software-properties-common
           wget -O- https://apt.releases.hashicorp.com/gpg | \
               gpg --dearmor | \
