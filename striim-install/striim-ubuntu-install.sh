@@ -64,6 +64,13 @@ then
     sed -i 's/# LicenceKey=/'"LicenceKey=$licence_key"'/' $startup_config
 
     echo "${GREEN} Successfully updated startup.properties file ${NC}"
+    
+    # Allocate memory to Striim server
+
+    gb_mem_max=$(echo "scale=1; 70/100 * $total_memory " | bc -l | xargs printf "%.0f")
+    mb_mem_max=$(echo "scale=1; 1024 * $gb_mem_max " | bc -l )
+    sed -i 's/# MEM_MAX=4096m/'"MEM_MAX=${mb_mem_max}m"'/' $startup_config
+    sed -i 's/# MaxHeapUsage=95/'"MaxHeapUsage=95"'/' $startup_config
 
     # Start and enable Striim dbms and node
 
@@ -80,3 +87,4 @@ else
       echo "${RED} Striim installation failed. Please check logs. ${NC} " 1>&2
       exit 1
 fi
+
