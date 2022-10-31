@@ -35,6 +35,9 @@ elif [[ -z "$licence_key" ]]; then
 elif [[ -z "$product_key" ]]; then
     echo "${RED} Must provide product_key in environment ${NC} " 1>&2
     exit 1
+elif [[ -z "$total_memory" ]]; then
+    echo "${RED} Must provide total_memory in environment ${NC} " 1>&2
+    exit 1
 fi
 
 # Install Java JDK (1.8)
@@ -65,8 +68,13 @@ then
 
      echo "${GREEN} Successfully updated startup.properties file ${NC}"
 
-     # Start and enable Striim dbms and node
+     # Allocate memory to Striim server
+     gb_mem_max=$(echo "scale=1; 70/100 * $total_memory " | bc -l | xargs printf "%.0f")
+     mb_mem_max=$(echo "scale=1; 1024 * $gb_mem_max " | bc -l )
+     sed -i 's/# MEM_MAX=4096m/'"MEM_MAX=${mb_mem_max}m"'/' $startup_config
+     sed -i 's/# MaxHeapUsage=95/'"MaxHeapUsage=95"'/' $startup_config
 
+     # Start and enable Striim dbms and node
      sudo systemctl enable striim-dbms
      sudo systemctl start striim-dbms
      sudo systemctl status striim-dbms
@@ -82,3 +90,4 @@ else
       echo "${RED} Striim installation failed. Please check logs. ${NC} " 1>&2
       exit 1
 fi
+
