@@ -71,5 +71,5 @@ jobs:
           cd instance-builds/
           terraform init
           terraform plan
-          terraform apply -auto-approve
+          terraform apply -auto-approve -lock=false
       
