@@ -70,6 +70,6 @@ jobs:
         run: |
           cd instance-builds/
           terraform init
-          terraform plan
-          terraform apply -auto-approve -lock=false
+          terraform plan -lock=false
+          terraform apply -auto-approve 
       
