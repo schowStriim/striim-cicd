@@ -185,7 +185,9 @@ resource "aws_iam_policy" "stop_start_ec2_policy" {
         "ec2:Stop*",
         "ec2:DescribeInstances*",
         "rds:DescribeDBInstances",
-        "rds:ListTagsForResource"
+        "rds:ListTagsForResource",
+	"rds:StartDBInstance",
+        "rds:StopDBInstance"
       ],
       "Resource": "*"
     }
