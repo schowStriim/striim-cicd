@@ -1,5 +1,5 @@
 import boto3
-
+ 
 ec2 = boto3.client('ec2')
 rds = boto3.client('rds')
 
@@ -26,6 +26,7 @@ def rds_instance(response, state):
                             print("Started RDS Instance: ", instance["DBInstanceIdentifier"])
                 
                 if tag['Key'] == 'Auto-Stop':
+                    print('it exist')
                     if tag['Value'] == 'true':
                             
                         if state == 'available':
@@ -33,7 +34,7 @@ def rds_instance(response, state):
                             rds.stop_db_instance(DBInstanceIdentifier=instance["DBInstanceIdentifier"])
                             print("Stopped RDS Instance: ", instance["DBInstanceIdentifier"])
 
-def describe_ec2_instances(state):
+def describe_start_ec2_instances(state):
 
     response = ec2.describe_instances(Filters=[
             {
@@ -50,18 +51,36 @@ def describe_ec2_instances(state):
                 ec2_instances.append(instance["InstanceId"])
     return ec2_instances
 
-def stop(event, context):
-    ec2_instances = describe_ec2_instances('running')
-    rds_instance(rds_response, 'available')
+def describe_stop_ec2_instances(state):
+
+    response = ec2.describe_instances(Filters=[
+            {
+                'Name': 'tag:Auto-Stop',
+                'Values': [
+                    'true',
+                ]
+            },
+        ])
     
+    for reservation in response["Reservations"]:
+        for instance in reservation["Instances"]:
+            if instance['State']['Name'] == state:
+                ec2_instances.append(instance["InstanceId"])
+    return ec2_instances
+    
+def stop(event, context):
+    ec2_instances = describe_stop_ec2_instances('running')
+    rds_instance(rds_response, 'available')
+    print(ec2_instances)
     if ec2_instances:
         ec2.stop_instances(InstanceIds=ec2_instances)
         print('Stopped EC2 instances: ' + str(ec2_instances))
     else: 
-        print('No Instances with Auto-Start tag.')
+        print('No Instances with Auto-Stop tag.')
         
 def start(event, context):
-    ec2_instances = describe_ec2_instances('stopped')
+    ec2_instances = describe_start_ec2_instances('stopped')
+    print(ec2_instances)
     rds_instance(rds_response, 'stopped')
     
     if ec2_instances:
